@@ -17,4 +17,4 @@ The UI has been customized, and additional features are planned for future devel
 **Styling:** TailwindCSS and DaisyUI for a clean and responsive design
 
 ## Link to Demo 
-https://mern-stack-project-22m1.onrender.com/login
+https://mern-stack-project-22m1.onrender.com/ 
