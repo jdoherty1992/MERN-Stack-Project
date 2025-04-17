@@ -25,4 +25,4 @@ Username: `joedolan`
 
 Password: `123456`
 
-*Note: All users currently have the same password ("123456") for testing purposes.*
+
