@@ -18,3 +18,8 @@ The UI has been customized, and additional features are planned for future devel
 
 ## Link to Demo 
 https://mern-stack-project-22m1.onrender.com/ 
+
+**Default User Credentials:**
+Username: `joedolan`  
+Password: `123456`
+*Note: All users currently have the same password ("123456") for testing purposes.*
