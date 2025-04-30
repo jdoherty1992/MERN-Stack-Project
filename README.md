@@ -1,6 +1,6 @@
 # Mern Stack Project 
 A real-time chat application built with the MERN stack, inspired by a video tutorial from [burakorkmez/mern-chat-app](https://github.com/burakorkmez/mern-chat-app).  
-The UI has been customized, and additional features are planned for future development.
+The UI has been customized, and additional features are planned for future development including full responsivness.
 ## Features 
 **MERN Stack:** MongoDB, Express.js, React, Node.js
 
@@ -18,3 +18,11 @@ The UI has been customized, and additional features are planned for future devel
 
 ## Link to Demo 
 https://mern-stack-project-22m1.onrender.com/ 
+
+**Default User Credentials:**
+
+Username: `joedolan`
+
+Password: `123456`
+
+
