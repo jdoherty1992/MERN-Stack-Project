@@ -88,3 +88,79 @@ export const logout = (req, res) => {
     }
 };
 
+export const profile = async(req, res) => {};
+
+export const updateProfile = async (req, res) => {
+    try {
+        const { fullName, username, password, confirmPassword, gender } = req.body;
+        
+        // Ensure the user is logged in (the protectRoute middleware should set req.user)
+        const userId = req.user._id;
+
+        // Find the user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // If username is being changed, make sure it's unique
+        if (username && username !== user.username) {
+            const existingUser = await User.findOne({ username });
+            if (existingUser) {
+                return res.status(400).json({ error: "Username already taken" });
+            }
+            user.username = username;
+        }
+
+        // Update the fields if provided
+        if (fullName) user.fullName = fullName;
+        if (gender) user.gender = gender;
+
+        // Handle password update if provided
+        if (password && password === confirmPassword) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
+        } else if (password && password !== confirmPassword) {
+            return res.status(400).json({ error: "Passwords do not match" });
+        }
+
+        // Update profile picture based on gender
+        if (gender) {
+            const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${user.username}`;
+            const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${user.username}`;
+            user.profilePic = gender === "male" ? boyProfilePic : girlProfilePic;
+        }
+
+        // Save the updated user
+        await user.save();
+
+        // Respond with updated user data
+        res.status(200).json({
+            _id: user._id,
+            fullName: user.fullName,
+            username: user.username,
+            profilePic: user.profilePic,
+        });
+        
+    } catch (error) {
+        console.log("Error in updateProfile controller", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+export const deleteProfile = async (req, res) => {
+    try {
+        const user = req.user;
+        console.log('Deleting user:', user);  // Add this line for debugging
+
+        if (!user) {
+            return res.status(400).json({ error: "User not found" });
+        }
+
+        await User.findByIdAndDelete(user._id);  // Delete user from DB
+        res.status(200).json({ message: "Profile deleted successfully" });
+    } catch (error) {
+        console.error('Error deleting profile:', error.message);  // Add more error logging
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};

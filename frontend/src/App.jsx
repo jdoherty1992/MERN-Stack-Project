@@ -3,8 +3,10 @@ import './App.css';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import SignUp from './pages/signup/SignUp';
+import Profile from './pages/profile/profile';
 import { Toaster } from 'react-hot-toast'; 
 import { useAuthContext } from './context/AuthContext';
+import UpdateProfile from './pages/updateProfile/UpdateProfile';
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
         <Route path='/' element={authUser ? <Home /> : <Navigate to={"/login"} />} />
         <Route path='/login' element={authUser ? <Navigate to="/" /> : <Login />} />
         <Route path='/signup' element={authUser ? <Navigate to="/" /> : <SignUp />} />
+        <Route path='/profile' element={authUser ? <Profile /> : <Navigate to="/login" />} />
+        <Route path='/update-profile' element={authUser ? <UpdateProfile /> : <Navigate to="/login" />} />
       </Routes>
       <Toaster />
     </div>
