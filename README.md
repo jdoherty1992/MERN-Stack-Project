@@ -25,7 +25,8 @@ Create a profile by clicking on 'Don't have an account?'
 
 Log in and message other users 
 
-Username and Password for testing: Each user has the same password '123456' with their username being their full name in lowercase with no spaces (eg. Joe Dolan --> joedolan) 
+**Username and Password** for testing: Each user has the same password '123456' with their username being their full name in lowercase with no spaces (eg. Joe Dolan --> joedolan) 
+
 NOTE: To test live chat functionality, open an incognito window and log in as a different user
 
 To Update or Delete profile, click on the profile icon at bottom of sidebar
