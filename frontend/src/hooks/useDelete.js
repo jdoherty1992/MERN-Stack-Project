@@ -13,7 +13,7 @@ const useDeleteProfile = () => {
         setLoading(true);
     
         try {
-            const response = await axios.delete('http://localhost:5000/api/auth/delete-profile', {
+            const response = await axios.delete('/api/auth/delete-profile', {
                 withCredentials: true,
             });
     
