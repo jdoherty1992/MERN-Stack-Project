@@ -56,14 +56,25 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const {username, password} = req.body;
+        console.log("Login request body:", req.body);
         const user = await User.findOne({username});
+        console.log("User found:", user);
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+        console.log("Is password correct:", isPasswordCorrect);
 
         if (!user || !isPasswordCorrect) {
             return res.status(400).json({error: "Invalid username or password"});
         }
 
-        generateTokenAndSetCookie(user._id, res);
+        // Debug log for JWT_SECRET
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
+        try {
+            generateTokenAndSetCookie(user._id, res);
+        } catch (tokenError) {
+            console.log("Error generating token:", tokenError);
+            return res.status(500).json({error: "Token generation failed"});
+        }
 
         res.status(200).json({
             _id: user._id,
@@ -73,7 +84,7 @@ export const login = async (req, res) => {
         });
 
     }   catch (error) {
-            console.log("Error in login controller", error.message);
+            console.log("Error in login controller", error);
             res.status(500).json({error: "Internal Server Error"});
         }
 };
